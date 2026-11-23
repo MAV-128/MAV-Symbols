@@ -23,12 +23,14 @@ jobs:
     
     - name: Install Inno Setup
       run: |
-        Invoke-WebRequest -Uri "https://jrsoftware.org/download.php/is.exe" -OutFile "$env:TEMP\is-setup.exe"
-        Start-Process -FilePath "$env:TEMP\is-setup.exe" -ArgumentList "/VERYSILENT","/NORESTART","/DIR=C:\InnoSetup" -Wait
+        $installer = "$env:TEMP\is-setup.exe"
+        Invoke-WebRequest -Uri "https://jrsoftware.org/download.php/is.exe" -OutFile $installer -UseBasicParsing
+        Start-Process -FilePath $installer -ArgumentList "/VERYSILENT","/NORESTART","/DIR=C:\InnoSetup" -Wait -NoNewWindow
     
     - name: Build Installer
       run: |
         & "C:\InnoSetup\ISCC.exe" MAVSymbols.iss
+      shell: pwsh
     
     - name: Upload Installer to Release
       uses: softprops/action-gh-release@v2
