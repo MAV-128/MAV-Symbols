@@ -1,0 +1,23 @@
+PackageIdentifier: MAV-128.MAVSymbols
+PackageVersion: 1.0
+InstallerLocale: en-US
+Platform:
+  - Windows.Desktop
+MinimumOSVersion: 10.0.0.0
+InstallerType: inno
+Scope: user
+InstallModes:
+  - interactive
+  - silent
+  - silentWithProgress
+InstallerSwitches:
+  Silent: /VERYSILENT /SUPPRESSMSGBOXES /NORESTART
+  SilentWithProgress: /SILENT /NORESTART
+  Custom: /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
+Installers:
+  - Architecture: x64
+    InstallerUrl: https://github.com/MAV-128/MAV-Symbols/releases/download/v1.0/MAVSymbols-1.0-Setup.exe
+    InstallerSha256: ПЛАЦЕХОЛДЕР_SHA256
+    ProductCode: "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}_is1"
+ManifestType: installer
+ManifestVersion: 1.6.0

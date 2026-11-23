@@ -35,6 +35,9 @@ settings.mavst
 ~*.tmp
 ~*.bak
 
+# Сборка установщика
+output/
+
 # Windows
 Thumbs.db
 ehthumbs.db

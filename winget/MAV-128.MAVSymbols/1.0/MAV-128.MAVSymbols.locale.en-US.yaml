@@ -1,0 +1,18 @@
+PackageIdentifier: MAV-128.MAVSymbols
+PackageVersion: 1.0
+PackageLocale: en-US
+Publisher: Andrey Morozov (MAV-128)
+PackageName: MAV Symbols
+License: GNU General Public License v3.0
+ShortDescription: Lightweight plain-text editor for Windows with smart encoding detection
+Description: |
+  MAV Symbols is a classic plain-text editor for Windows 10/11. It reliably detects encodings
+  (including Cyrillic and CJK), warns you before any character is lost, saves files atomically,
+  and brings your unsaved text back after a crash.
+Tags:
+  - text-editor
+  - encoding
+  - utf-8
+  - windows
+ManifestType: defaultLocale
+ManifestVersion: 1.6.0
