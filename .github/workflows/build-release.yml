@@ -21,14 +21,14 @@ jobs:
       run: |
         msbuild "MAV Symbols.sln" /p:Configuration=Release /p:Platform="Any CPU" /t:Rebuild
     
-    - name: Setup Inno Setup
-      uses: crazy-max/ghaction-innosetup@v3
-      with:
-        install-dir: C:\Program Files (x86)\Inno Setup 7
+    - name: Install Inno Setup
+      run: |
+        Invoke-WebRequest -Uri "https://jrsoftware.org/download.php/is.exe" -OutFile "$env:TEMP\is-setup.exe"
+        Start-Process -FilePath "$env:TEMP\is-setup.exe" -ArgumentList "/VERYSILENT","/NORESTART","/DIR=C:\InnoSetup" -Wait
     
     - name: Build Installer
       run: |
-        iscc MAVSymbols.iss
+        & "C:\InnoSetup\ISCC.exe" MAVSymbols.iss
     
     - name: Upload Installer to Release
       uses: softprops/action-gh-release@v2
