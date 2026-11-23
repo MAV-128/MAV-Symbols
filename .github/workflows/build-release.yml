@@ -17,41 +17,22 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
     
-    - name: Setup Inno Setup
-      uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
-      with:
-        path: .
-    
     - name: Build Release
       run: |
         msbuild "MAV Symbols.sln" /p:Configuration=Release /p:Platform="Any CPU" /t:Rebuild
     
-    - name: Calculate SHA256
-      id: sha256
+    - name: Setup Inno Setup
+      uses: crazy-max/ghaction-innosetup@v3
+      with:
+        install-dir: C:\Program Files (x86)\Inno Setup 7
+    
+    - name: Build Installer
       run: |
-        $hash = (Get-FileHash "output\MAVSymbols-1.0-Setup.exe" -Algorithm SHA256).Hash.ToLower()
-        echo "sha256=$hash" >> $env:GITHUB_OUTPUT
+        iscc MAVSymbols.iss
     
     - name: Upload Installer to Release
-      uses: shogo82148/actions-upload-release-asset@v1
+      uses: softprops/action-gh-release@v2
+      with:
+        files: output/MAVSymbols-1.0-Setup.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ./output/MAVSymbols-1.0-Setup.exe
-        asset_name: MAVSymbols-1.0-Setup.exe
-        asset_content_type: application/vnd.microsoft.portable-executable
-    
-    - name: Update winget manifest
-      run: |
-        $manifest = Get-Content "winget/MAV-128.MAVSymbols/1.0/MAV-128.MAVSymbols.installer.yaml" -Raw
-        $manifest = $manifest -replace "ПЛАЦЕХОЛДЕР_SHA256", "${{ steps.sha256.outputs.sha256 }}"
-        Set-Content "winget/MAV-128.MAVSymbols/1.0/MAV-128.MAVSymbols.installer.yaml" -Value $manifest
-    
-    - name: Commit winget manifest
-      run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git add winget/
-        git commit -m "Update winget manifest for v1.0" || echo "No changes to commit"
-        git push
