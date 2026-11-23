@@ -1,0 +1,41 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.cache
+*.dll
+*.pdb
+*.exe
+# Если появится сторонняя библиотека, нужная для сборки, добавьте исключение:
+# !lib/*.dll
+
+# Папки сборки
+bin/
+obj/
+[Bb]uild[Ll]og.*
+
+# Настройки пользователя
+*.sdf
+*.opensdf
+*.cachefile
+
+# NuGet
+packages/
+*.nupkg
+
+# Публикация и подпись
+publish/
+*.pfx
+
+# Настройки приложения (не коммитить пользовательские настройки)
+settings.mavst
+*.mavrec
+
+# Временные файлы самого MAV Symbols (атомарное сохранение)
+~*.tmp
+~*.bak
+
+# Windows
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
