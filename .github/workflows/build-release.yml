@@ -21,16 +21,13 @@ jobs:
       run: |
         msbuild "MAV Symbols.sln" /p:Configuration=Release /p:Platform="Any CPU" /t:Rebuild
     
-    - name: Install Inno Setup
+    - name: Install Inno Setup via Chocolatey
       run: |
-        $installer = "$env:TEMP\is-setup.exe"
-        Invoke-WebRequest -Uri "https://jrsoftware.org/download.php/is.exe" -OutFile $installer -UseBasicParsing
-        Start-Process -FilePath $installer -ArgumentList "/VERYSILENT","/NORESTART","/DIR=C:\InnoSetup" -Wait -NoNewWindow
+        choco install innosetup -y --no-progress
     
     - name: Build Installer
       run: |
-        & "C:\InnoSetup\ISCC.exe" MAVSymbols.iss
-      shell: pwsh
+        iscc MAVSymbols.iss
     
     - name: Upload Installer to Release
       uses: softprops/action-gh-release@v2
