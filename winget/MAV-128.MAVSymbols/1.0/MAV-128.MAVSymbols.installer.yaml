@@ -16,8 +16,8 @@ InstallerSwitches:
   Custom: /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
 Installers:
   - Architecture: x64
-    InstallerUrl: https://github.com/MAV-128/MAV-Symbols/releases/download/v1.0/MAVSymbols-1.0-Setup.exe
-    InstallerSha256: ПЛАЦЕХОЛДЕР_SHA256
+    InstallerUrl: https://github.com/MAV-128/MAV-Symbols/releases/download/v1.0.2/MAVSymbols-1.0-Setup.exe
+    InstallerSha256: DD9FF55734B5B283C77E68337201B9747F346B8E279FF1E190543FE0B56317FB
     ProductCode: "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}_is1"
 ManifestType: installer
 ManifestVersion: 1.6.0
